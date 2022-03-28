@@ -4,7 +4,7 @@ import axios from "axios";
 import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointment";
-import { getAppointmentsForDay, getInterview } from "helpers/selectors";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 import useVisualMode from "hooks/useVisualMode";
 
 export default function Application(props) {
@@ -15,8 +15,9 @@ export default function Application(props) {
     interviewers: {}
   })
 
-  let dailyAppointments = [];
-  dailyAppointments = getAppointmentsForDay(state, state.day);
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
+
+  const dailyInterviewers = getInterviewersForDay(state, state.day);
 
   const setDay = day => setState({ ...state, day});
 
@@ -40,10 +41,13 @@ export default function Application(props) {
         key={appMap.id}
         id={appMap.id}
         time={appMap.time}
+        interviewers={dailyInterviewers}
         interview={interview}
       />
     )
   })
+
+  
 
   // function handleDay() {
   //   return setDay(props.day)
