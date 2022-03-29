@@ -18,6 +18,7 @@ export default function Appointment(props) {
   );
 
   function save(name, interviewer) {
+    //console.log(interviewer, " is interviewer");
     const interview = {
       student: name,
       interviewer
@@ -25,10 +26,9 @@ export default function Appointment(props) {
     transition(SAVING);
     props.bookInterview(props.id, interview)
     transition(SHOW);
-
     
   }
-  console.log("PROPS", props);
+  //console.log("PROPS", props);
 
   // function appTime() {
   //   if (props.time) {
@@ -37,17 +37,20 @@ export default function Appointment(props) {
   //     return `No Appointments`
   //   }
   // }
-
+  //console.log("INTERVIEWERS: ", props.interview.interviewer);
   return (
     <article className="appointment">
       <Header time={props.time}/>
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SHOW && (
+
         <Show 
+          //props={props.interview}
           student={props.interview.student}
           interviewer={props.interview.interviewer.name}
         />
       )}
+
       {mode === CREATE && (
         <Form
           interviewers={props.interviewers}
