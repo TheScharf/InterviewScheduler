@@ -34,8 +34,9 @@ export default function useApplcationData(){
       ...state.appointments,
       [id]: appointment
     };
-    return axios.put(`/api/appointments/${id}`, appointment).then(() => {
-    setState(prev => ({...prev, appointments}));
+    return axios.put(`/api/appointments/${id}`, appointment).then((res) => {
+      const days = updateSpots(state.day, state.days, appointments);
+      setState(prev => ({...prev, appointments, days}));
     })    
   }
 
@@ -49,10 +50,28 @@ export default function useApplcationData(){
       ...state.appointments,
       [id]: appointment
     };
-    return axios.delete(`/api/appointments/${appointment.id}`).then (() => {
-      setState({...state, appointments})
+    return axios.delete(`/api/appointments/${appointment.id}`).then ((res) => {
+      const days = updateSpots(state.day, state.days, appointments);
+      setState({...state, appointments, days})
     })
 
+  }
+
+  function updateSpots(day, days, appointments) {
+    const dayObj = days.find((item) => item.name === day);
+    const apptID = dayObj.appointments;
+
+    let spots = 0;
+
+    for (const id of apptID) {
+      const appt = appointments[id];
+      if (!appt.interview) {
+        spots++;
+      }
+    }
+    const newDayObj = {...dayObj, spots};
+    const newArr = days.map((item) => (item.name === day ? newDayObj : item));
+    return newArr;
   }
 
   return { state, useEffect, cancelInterview, bookInterview, setDay };
