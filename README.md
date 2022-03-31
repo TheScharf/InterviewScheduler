@@ -25,3 +25,8 @@ npm test
 ```sh
 npm run storybook
 ```
+!["Booked appointments in Interview Scheduler"](https://github.com/TheScharf/scheduler/blob/master/docs/ApptsBooked.png?raw=true)
+
+!["Booking a new appointment is easy!"](https://github.com/TheScharf/scheduler/blob/master/docs/AddAppt.png?raw=true)
+
+!["To avoid accidentally deleting an appointment we will ask you to confirm"](https://github.com/TheScharf/scheduler/blob/master/docs/DeleteAppt.png?raw=true)
