@@ -7,22 +7,24 @@ export default function Form(props){
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
 
+  //// resets the student and interviewer state ////
   function reset() {
     setStudent("");
     setInterviewer(null);
   }
 
+  //// to cancel an appointment ////
   function cancel() {
     props.onCancel();
     reset();
   }
 
+  //// to confirm an appointment being booked is attached to a students name ////
   function validate() {
     if (student === "") {
       setError("Student name cannot be blank");
       return;
     }
-
     setError("")
     props.onSave(student, interviewer);
   }

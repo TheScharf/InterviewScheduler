@@ -9,8 +9,10 @@ export default function useApplcationData(){
     interviewers: {}
   });
 
+  //// Sets state for the day ////
   const setDay = day => setState({ ...state, day});
 
+  //// axios requests ////
   useEffect(() => {
     Promise.all([
       axios.get('http://localhost:8001/api/days'),
@@ -24,8 +26,8 @@ export default function useApplcationData(){
     })
   }, []);
 
+  //// to book a new interview ////
   function bookInterview(id, interview) {
-    //console.log(id, interview);
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -40,6 +42,7 @@ export default function useApplcationData(){
     })    
   }
 
+  //// to cancel an existing interview ////
   function cancelInterview(id, interview) {
     console.log(id, interview);
     const appointment = {
@@ -57,6 +60,7 @@ export default function useApplcationData(){
 
   }
 
+  //// updates available spots for appointments whenever a change has occured ////
   function updateSpots(day, days, appointments) {
     const dayObj = days.find((item) => item.name === day);
     const apptID = dayObj.appointments;

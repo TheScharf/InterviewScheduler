@@ -25,7 +25,6 @@ export default function Appointment(props) {
   );
 
   function save(name, interviewer) {
-    //console.log(interviewer, " is interviewer");
     const interview = {
       student: name,
       interviewer
@@ -54,16 +53,6 @@ export default function Appointment(props) {
       })
   }
 
-  //console.log("PROPS", props);
-
-  // function appTime() {
-  //   if (props.time) {
-  //     return `Appointment at ${props.time}`
-  //   } else {
-  //     return `No Appointments`
-  //   }
-  // }
-  //console.log("INTERVIEWERS: ", props.interview.interviewer);
   return (
     <article className="appointment">
       <Header time={props.time}/>
@@ -71,7 +60,6 @@ export default function Appointment(props) {
       {mode === SHOW && (
 
         <Show 
-          //props={props.interview}
           student={props.interview && props.interview.student}
           interviewer={props.interview && props.interview.interviewer && props.interview.interviewer.name}
           onEdit={() => {
